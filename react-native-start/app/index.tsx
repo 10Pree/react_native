@@ -1,12 +1,7 @@
 import Person from "@/components/person";
 import { useState } from "react";
 import { Button, FlatList, Text, View } from "react-native";
-
-interface User {
-  id: number;
-  name: string;
-  age: number;
-}
+import { User } from "@/types/user";
 
 export default function App() {
   const [data, setData] = useState<User[]>([]);
