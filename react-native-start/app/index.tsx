@@ -1,7 +1,7 @@
+import AddForm from "@/components/addForm";
 import Person from "@/components/person";
-import { User } from "@/types/user";
 import { useState } from "react";
-import { Alert, Button, FlatList, Text, View } from "react-native";
+import { Alert, FlatList, Text, View } from "react-native";
 
 export default function App() {
   // const [data, setData] = useState<User[]>([
@@ -11,10 +11,10 @@ export default function App() {
   //   { id: 4, name: "Kiss", age: 21 },
   // ]);
   const [data, setData] = useState([
-    {id: 1, name: "นนท์", age: 21 },
-    {id: 2, name: "bas", age: 51 },
-    {id: 3, name: "book", age: 31 },
-    {id: 4, name: "Kiss", age: 21 }
+    { id: 1, name: "นนท์", age: 21 },
+    { id: 2, name: "bas", age: 51 },
+    { id: 3, name: "book", age: 31 },
+    { id: 4, name: "Kiss", age: 21 },
   ]);
   // const addUserAll = () => {
   //   setData([
@@ -30,12 +30,22 @@ export default function App() {
   //   setData([]);
   // };
 
-  const deleteData = (id:number) => {
-    Alert.alert("ลบแล้ว", `ลบ ID:${id} แล้ว`)
-    setData((prevData)=>{
-      return prevData.filter((item)=> item.id !== id)
-    })
-  }
+  const deleteData = (id: number) => {
+    Alert.alert("ลบแล้ว", `ลบ ID:${id} แล้ว`);
+    setData((prevData) => {
+      return prevData.filter((item) => item.id !== id);
+    });
+  };
+  const insertData = (name: string, age: number) => {
+    if (name === "" && age === 0) {
+      Alert.alert("ไม่ได้ ระบุข้อมูล", "กรุณาแจ้งชื่อและอายุ");
+      return;
+    }
+    console.log(name, age);
+    setData((prev) => {
+      return [{ id: Math.random(), name, age }, ...prev];
+    });
+  };
   return (
     <View className="flex-1 items-center bg-red-500">
       <View className="h-[50%] mt-8">
@@ -47,7 +57,9 @@ export default function App() {
         <FlatList
           className="px-8 border"
           data={data}
-          renderItem={({ item }) => <Person item={item} deleteData={deleteData}/>}
+          renderItem={({ item }) => (
+            <Person item={item} deleteData={deleteData} />
+          )}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ gap: 18 }} // แต่งให้ข้อมูลไม่ชนมุมล่าง หรือ กำหนด Style บางอัน
           ListHeaderComponent={
@@ -62,10 +74,9 @@ export default function App() {
           }
         />
       </View>
-      <View className="gap-4 mt-4">
-        {/* <Button title="Add" onPress={() => addUserAll()} />
+      <AddForm insertData={insertData} />
+      {/* <Button title="Add" onPress={() => addUserAll()} />
         <Button title="Delete" onPress={() => deleteUserAll()} /> */}
-      </View>
     </View>
   );
 }
