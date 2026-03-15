@@ -1,10 +1,11 @@
 import { User } from "@/types/user";
-import { Text, TouchableOpacity, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Text, TouchableOpacity, View } from "react-native";
 //TODO:  export default function Person({name, age}: {name: string; age: number})
+// การใช้ Type ใน parameter
 type propsData = {
   item: User;
-  deleteData: (id: number) => void;
+  deleteData: (id: number) => void; // function รับค่าอะไรบ้างและ => ไม่ return อะไรเลย คือ void
 };
 export default function Person({ item, deleteData }: propsData) {
   return (

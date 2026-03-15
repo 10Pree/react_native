@@ -30,12 +30,14 @@ export default function App() {
   //   setData([]);
   // };
 
+  // ลบข้อมมูล
   const deleteData = (id: number) => {
     Alert.alert("ลบแล้ว", `ลบ ID:${id} แล้ว`);
     setData((prevData) => {
       return prevData.filter((item) => item.id !== id);
     });
   };
+  // เพิ่มข้อมูล
   const insertData = (name: string, age: number) => {
     if (name === "" && age === 0) {
       Alert.alert("ไม่ได้ ระบุข้อมูล", "กรุณาแจ้งชื่อและอายุ");
